@@ -1,4 +1,5 @@
-
+#Maxwell Dulin
+#ILY!
 
 class Encode:
     """
@@ -19,7 +20,7 @@ class Encode:
 
     #*************
     #Need to add a bigger library here!
-    #Also need to be able to accept special characters here like NULL and others.d
+    #Also need to be able to accept special characters here like NULL and others.
     def URL_dict_create(self):
         """
         Gets the character to URL-character encoder chart.
@@ -39,7 +40,7 @@ class Encode:
         return URL_dict
 
 
-    def change_URL(self,char):
+    def change_URL(self, char):
         """
         Changes the character from a character to a URL-encoded character
         Returns:
@@ -63,6 +64,16 @@ class Encode:
                 print("Warning..." + char + " is " + " not in the URL encoder library. Skipped " + char + "...")
         print("Successful!")
         return encoded.replace('\n','')
+
+    def convert_to_base_64(self, string):
+        pass
+
+    def convert_to_base_62(self,string):
+        pass
+        
+    def convert_to_base_32(self, string):
+        pass
+
 
 def main():
     E = Encode()
