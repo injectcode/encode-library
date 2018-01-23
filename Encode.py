@@ -1,5 +1,22 @@
 #Maxwell Dulin
 #ILY!
+# http://www.utf8-chartable.de/unicode-utf8-table.pl?utf8=dec
+
+"""
+Modes for the spoofer:
+The normal mode:
+    This will use pretty normal characters, but different enough.
+Crazy mode:
+    This will use obscure characters to confuse the data reader.
+
+Tags:
+    -u: URL Mode
+    -s: spoof Mode
+    -p: puncutation
+    -i: enables interactive interface
+    -c letter: obfusicate it using this character
+    -a: obfusicate the whole string
+"""
 
 class Encode:
     """
@@ -95,13 +112,13 @@ class Encode:
         """
         Sets up the character swaps for every normal character.
         """
-        self.get_letter('A')
-        """
+        #self.get_letter('A')
+
 
         #uppercase letters
-        for spot in range(ord('A'),ord('Z')+1):
+        for spot in range(ord('A'),ord('O')+1):
             self.get_letter(chr(spot))
-
+        """
         #lowercase letters
         for spot in range(ord('a'),ord('z')+1):
             self.get_letter(chr(spot))
@@ -156,6 +173,7 @@ class Encode:
         print('Tests have passed!')
 def main():
     E = Encode()
+    E.setup_spoof()
     E.test()
-    
+
 main()
