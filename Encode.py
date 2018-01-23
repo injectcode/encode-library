@@ -18,6 +18,7 @@ class Encode:
         """
         self.URL_dict = self.URL_dict_create()
         self.spoof_dict = dict()
+        self.setup_spoof()
     #*************
     #Need to add a bigger library here!
     #Also need to be able to accept special characters here like NULL and others.
@@ -30,7 +31,7 @@ class Encode:
             URL_dict(dict): key: character(string)
                             value: Encoding(string)
         """
-        URLS = open("UTF.txt","r")
+        URLS = open("Resources/UTF.txt","r")
         URL_dict = dict()
         URL_dict[" "] = "%20"
         URL_dict[""] = "%00"
@@ -62,7 +63,6 @@ class Encode:
                 encoded +=self.URL_dict[char]
             except KeyError:
                 print("Warning..." + char + " is " + " not in the URL encoder library. Skipped " + char + "...")
-        print("Successful!")
         return encoded.replace('\n','')
 
     def convert_to_base_64(self, string):
@@ -85,18 +85,41 @@ class Encode:
         """
 
         if category not in self.spoof_dict:
-            self.spoof_dict[category] = [char]
+            self.spoof_dict[category] = [char.encode("utf-8")]
         else:
             array = self.spoof_dict[category]
-            array.append(char)
+            array.append(char.encode("utf-8"))
             self.spoof_dict[category] = array
-        print self.spoof_dict
 
     def setup_spoof(self):
         """
         Sets up the character swaps for every normal character.
         """
-        pass
+        self.get_letter('A')
+        """
+
+        #uppercase letters
+        for spot in range(ord('A'),ord('Z')+1):
+            self.get_letter(chr(spot))
+
+        #lowercase letters
+        for spot in range(ord('a'),ord('z')+1):
+            self.get_letter(chr(spot))
+        """
+        #special characters
+        # * + \ [] {} ' " : ; , . / \ | < >
+
+
+    def get_letter(self,letter):
+        """
+        For a given character, it imports all of the similar looking letters into a dictionary.s
+        Args:
+            letter(string): the reference string for a file to be the key for the dictionary.
+        """
+
+        URLS = open("Resources/"+letter +".txt","r")
+        for line in URLS:
+            self.insert_obs(letter,line.strip('\n').decode("utf-8"))
 
     def replace_char(self, text, char, replace):
         """
@@ -110,10 +133,29 @@ class Encode:
         """
         return text.replace(char,replace)
 
+
     def spoof_encode(self,string):
         pass
 
+
+    def test(self):
+        """
+        A test that should be ran before this is ever pushed back up!
+        This runs through all of the URL possible characters of the normal alphabet.
+        """
+
+        string = "abcdefghijklmnopqrstuvwxyz"
+        check_string = """%61%62%63%64%65%66%67%68%69%6A%6B%6C%6D%6E%6F%70%71%72%73%74%75%76%77%78%79%7A"""
+        assert(self.URL_string_change(string) == check_string)
+        string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        check_string = "%41%42%43%44%45%46%47%48%49%4A%4B%4C%4D%4E%4F%50%51%52%53%54%55%56%57%58%59%5A"
+        assert(self.URL_string_change(string) == check_string)
+        string = "0123456789"
+        check_string = "%30%31%32%33%34%35%36%37%38%39"
+        assert(self.URL_string_change(string) == check_string)
+        print('Tests have passed!')
 def main():
     E = Encode()
-    print u'\u00B2'.encode("utf-8")
+    E.test()
+    
 main()
