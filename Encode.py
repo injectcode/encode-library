@@ -17,7 +17,7 @@ class Encode:
         Intializer
         """
         self.URL_dict = self.URL_dict_create()
-
+        self.spoof_dict = dict()
     #*************
     #Need to add a bigger library here!
     #Also need to be able to accept special characters here like NULL and others.
@@ -70,13 +70,50 @@ class Encode:
 
     def convert_to_base_62(self,string):
         pass
-        
+
     def convert_to_base_32(self, string):
         pass
 
 
+    def insert_obs(self, category, char):
+        """
+        Inserts a single instance into the dictionary
+        Args:
+            category(string): is a single character used to describe a basic ASCII code
+            char(string): is a single character, which will likely be un unicode, that represents
+                a look-alike of the category.
+        """
+
+        if category not in self.spoof_dict:
+            self.spoof_dict[category] = [char]
+        else:
+            array = self.spoof_dict[category]
+            array.append(char)
+            self.spoof_dict[category] = array
+        print self.spoof_dict
+
+    def setup_spoof(self):
+        """
+        Sets up the character swaps for every normal character.
+        """
+        pass
+
+    def replace_char(self, text, char, replace):
+        """
+        Changes the character in the string into the the obfusicated version of it.
+        Args:
+            text(string): the characters being acted on.
+            char(string): the individual character to be changed.
+            replace(string): the individual characer that is being swapped for the orginal one.
+        Returns:
+            alter(string): the obfusicated string.
+        """
+        return text.replace(char,replace)
+
+    def spoof_encode(self,string):
+        pass
+
 def main():
     E = Encode()
-    print E.URL_string_change("hackers unite8!")
-
+    print u'\u00B2'.encode("utf-8")
 main()
