@@ -116,16 +116,26 @@ class Encode:
 
 
         #uppercase letters
-        for spot in range(ord('A'),ord('O')+1):
+        for spot in range(ord('A'),ord('Z')+1):
             self.get_letter(chr(spot))
-        """
+            #print chr(spot),self.spoof_dict[chr(spot)]
+
         #lowercase letters
         for spot in range(ord('a'),ord('z')+1):
             self.get_letter(chr(spot))
-        """
+
+        self.setup_spoof_num()
         #special characters
         # * + \ [] {} ' " : ; , . / \ | < >
 
+
+    def setup_spoof_punc(self):
+        pass
+
+    def setup_spoof_num(self):
+        num_list = ["one","two","three","four","five","six","seven","eight","nine"]
+        for num in num_list:
+            self.get_letter(num)
 
     def get_letter(self,letter):
         """
@@ -135,6 +145,7 @@ class Encode:
         """
 
         URLS = open("Resources/"+letter +".txt","r")
+        #need an exception list here for puncutation and integers
         for line in URLS:
             self.insert_obs(letter,line.strip('\n').decode("utf-8"))
 
@@ -171,9 +182,11 @@ class Encode:
         check_string = "%30%31%32%33%34%35%36%37%38%39"
         assert(self.URL_string_change(string) == check_string)
         print('Tests have passed!')
+
 def main():
     E = Encode()
     E.setup_spoof()
+    print E.spoof_dict["one"][-1]
     E.test()
 
 main()
