@@ -1,6 +1,10 @@
+# -*- coding: utf-8 -*-
+
 #Maxwell Dulin
 #ILY!
 # http://www.utf8-chartable.de/unicode-utf8-table.pl?utf8=dec
+
+
 
 """
 Modes for the spoofer:
@@ -9,6 +13,12 @@ The normal mode:
 Crazy mode:
     This will use obscure characters to confuse the data reader.
 
+different modes for different types?
+1 for scripts, tricks google
+2 for added characters
+3 for craziness?
+#scripts tend to work
+better in google, rather than accent marks and other things.
 Tags:
     -u: URL Mode
     -s: spoof Mode
@@ -112,42 +122,49 @@ class Encode:
         """
         Sets up the character swaps for every normal character.
         """
-        #self.get_letter('A')
 
+        file_dict = self.setup_file_dict()
+        for char in file_dict:
+            self.get_letter(char,file_dict[char])
+
+    def setup_file_dict(self):
+        """
+        Gets the file names to be used for the spoof_dict
+        Returns
+            file_call_dict(dictionary): key-char value-file_name
+        """
+
+        RLS = open("punc.txt","r")
+        file_call_dict = dict()
+
+        #numbers and puncutation
+        for line in RLS:
+            character = line.split(" ")
+            file_call_dict[character[0]] = character[1].strip("\n")
 
         #uppercase letters
         for spot in range(ord('A'),ord('Z')+1):
-            self.get_letter(chr(spot))
-            #print chr(spot),self.spoof_dict[chr(spot)]
-
-        #lowercase letters
+            character = chr(spot)
+            file_call_dict[character] = character
+        #lowercase
         for spot in range(ord('a'),ord('z')+1):
-            self.get_letter(chr(spot))
+            character = chr(spot)
+            file_call_dict[character] = character
 
-        self.setup_spoof_num()
-        #special characters
-        # * + \ [] {} ' " : ; , . / \ | < >
+        return file_call_dict
 
-
-    def setup_spoof_punc(self):
-        pass
-
-    def setup_spoof_num(self):
-        num_list = ["one","two","three","four","five","six","seven","eight","nine"]
-        for num in num_list:
-            self.get_letter(num)
-
-    def get_letter(self,letter):
+    def get_letter(self,letter,file_name):
         """
         For a given character, it imports all of the similar looking letters into a dictionary.s
         Args:
             letter(string): the reference string for a file to be the key for the dictionary.
         """
 
-        URLS = open("Resources/"+letter +".txt","r")
+        URLS = open("Resources/"+file_name+".txt","r")
         #need an exception list here for puncutation and integers
         for line in URLS:
             self.insert_obs(letter,line.strip('\n').decode("utf-8"))
+
 
     def replace_char(self, text, char, replace):
         """
@@ -161,10 +178,57 @@ class Encode:
         """
         return text.replace(char,replace)
 
+    def spoof_encode_crazy(self, string):
+        """
+        Adds the craziest version of each character to the version of the number.
+        Args:
+            string(string): the string to be encoded
+        Returns:
+            encode(string): the encoded string
+        """
 
-    def spoof_encode(self,string):
-        pass
+        encode = string
+        for char in string:
+            if(self.is_legal(char)):
+                encode = self.replace_char(encode,char,self.spoof_dict[char][-1])
+        return encode
 
+    def change_spot(self, string, character, char_num):
+        """
+        Changes a particular character based on a spot in the file.
+        Args:
+            string(string): the text being altered.
+            character(string): the character to be changed.
+            char_num(int): the character to be used(starting with 1)
+        Returns:
+            encode(string): the altered string.
+        """
+        encode = ""
+        for char in string:
+            if(char == character):
+                sub = self.spoof_dict[character]
+                if(len(sub) > char_num):
+                    encode += sub[char_num-1]
+                else:
+                    print("Character number doesn't not exist...\nAdded last item.")
+                    encode+= sub[-1]
+            else:
+                encode += char
+        return encode
+
+    def is_legal(self,char):
+        """
+        The dictionary doesn't want to evaluate certain charaters.
+        Args:
+            char(string): the character being evaluated
+        Returns:
+            true: if the string is valid
+            false: if the string is not valid
+        """
+
+        if(char != ' ' and char != '\t' and char != '\n'):
+            return True
+        return False
 
     def test(self):
         """
@@ -185,8 +249,12 @@ class Encode:
 
 def main():
     E = Encode()
-    E.setup_spoof()
-    print E.spoof_dict["one"][-1]
-    E.test()
+    t = E.spoof_encode_crazy("How was your day?")
+    print t
+
+    #good example!
+    #scripts tend to be evaluated the same, but have a different encoding than added marks.
+    #print ("ｂ".decode("utf-8") == "ｂ".decode("utf-8"))
+
 
 main()
