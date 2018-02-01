@@ -19,7 +19,7 @@ class interface:
         self.encoded_text = ""
         self.setup_args()
         self.setting = 0
-        self.parse_input()
+
 
 
 
@@ -101,6 +101,9 @@ class interface:
                 elif(self.setting == 1):
                     self.encoded_text = self.URL.URL_spoof_spot(self.encoded_text,self.args[spot+1])
 
-        print self.encoded_text
+        return self.encoded_text
+
 if __name__ == '__main__':
     I = interface()
+    text = I.parse_input()
+    print text
