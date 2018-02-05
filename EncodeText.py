@@ -5,29 +5,6 @@
 # http://www.utf8-chartable.de/unicode-utf8-table.pl?utf8=dec
 
 
-
-"""
-Modes for the spoofer:
-The normal mode:
-    This will use pretty normal characters, but different enough.
-Crazy mode:
-    This will use obscure characters to confuse the data reader.
-
-different modes for different types?
-1 for scripts, tricks google
-2 for added characters
-3 for craziness?
-#scripts tend to work
-better in google, rather than accent marks and other things.
-Tags:
-    -u: URL Mode
-    -s: spoof Mode
-    -p: puncutation
-    -i: enables interactive interface
-    -c letter: obfusicate it using this character
-    -a: obfusicate the whole string
-"""
-
 class EncodeText:
     """
     Used to encode a string of text, from the choosen user, into a specified type.
@@ -45,16 +22,6 @@ class EncodeText:
         """
         self.spoof_dict = dict()
         self.setup_spoof()
-
-    def convert_to_base_64(self, string):
-        pass
-
-    def convert_to_base_62(self,string):
-        pass
-
-    def convert_to_base_32(self, string):
-        pass
-
 
     def insert_obs(self, category, char):
         """
@@ -242,15 +209,18 @@ class EncodeText:
 if __name__ == '__main__':
     E = EncodeText()
     #E.get_letter('s','s')
+    print "Encodings for 'How was your day?'"
     t = E.spoof_encode_script("How was your day?")
-    print t
+    print "Script text mode: ", t
     t = E.spoof_encode_ticks("How was your day?")
-    print t
+    print "Ticks text mode: ", t
     t = E.spoof_encode_crazy("How was your day?")
-    print t
-    print E.spoof_punc("OR 1=1",0)
-
+    print "Encode all wildly: ", t
+    print
+    t = E.spoof_punc("<script> hacktheplanet </script>",0)
+    print "Encode '<script> hacktheplanet </script>'\n", t
+    print
 
     #good example!
     #scripts tend to be evaluated the same, but have a different encoding than added marks.
-    print ("ｂ".decode("utf-8") == "b".decode("utf-8"))
+    print "Does ｂ = b?", "ｂ".decode("utf-8") == "b".decode("utf-8")

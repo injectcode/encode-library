@@ -117,7 +117,11 @@ class EncodeURL:
 
     def URL_spoof_char(self,string,change):
         """
-
+        Spoofs a single character
+        Args:
+            string(str): the string being encoded
+            change(str): the character to be changed out
+        Returns: a string with the character changed in the URL
         """
         encoded = ""
         iteration = 1
@@ -132,6 +136,7 @@ class EncodeURL:
                 encoded += char
             iteration+=1
         return encoded.replace('\n','')
+
 if __name__ == '__main__':
 
     U = EncodeURL()

@@ -1,17 +1,9 @@
 # -*- coding: utf-8 -*-
 import sys
-"""
-Tags:
-    -u: URL Mode
-    -s: spoof Mode
-    -p: puncutation
-    -i: enables interactive interface
-    -c letter: obfusicate it using this character
-    -a: obfusicate the whole string
-"""
 
 from EncodeText import EncodeText
 from EncodeURL import EncodeURL
+
 class interface:
     def __init__(self):
         self.Text = EncodeText()
