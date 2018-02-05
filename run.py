@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import sys
 """
 Tags:
@@ -20,19 +21,55 @@ class interface:
         self.setup_args()
         self.setting = 0
 
-
-
-
     def setup_args(self):
         """
         Sets all of the command line arguements into a list.
         """
-
+        if len(sys.argv) <=1 or sys.argv[1] == '-h' or sys.argv[1] == '-H':
+            print self.help_text()
+            return 0
         lst = list()
         for arg in sys.argv:
             self.args.append(arg)
         self.encoded_text = self.args[1]
         self.args = self.args[1:]
+
+    def help_text(self):
+        """
+        Returns:
+            help(string): the instructional to the page.
+        """
+        help_list ="""
+    Welcome to the Encoder!
+    The last place you'll ever
+    have to go in order to alter your text!
+
+    Functionality:
+    python run.py "text" -mode -flags
+        ex: python run.py "hacktheplanet<script>" -t -p
+        displays-- hacktheplanet﹤script﹥
+        text: the text being evaluated
+        mode: the mode being used
+        flags: parameters for the use
+    The parameters have to go in this order. The additional
+        flags are for altering the string, are referenced below.
+        Order does matter for which way the flags are used.
+
+    Modes supported:
+    -u: URL encodings
+    -t: ASCII to unicode trickery
+    -b: base encoding
+
+    Flags to use:
+    -p: Puncutation(u,t)
+    -c char: A single character(u,t)
+    -k: Craziness; does the craziness thing possible(u,t)
+    -s: Script mode for all characters(t)
+    -a: Ticks on top of the characters(t)
+    -1 char spot: Replaces the 'char' with in the 'spot'(t)
+    -2 spot: Replaces the character with the URL encode(u)
+        """
+        return help_list
 
     def parse_input(self):
         """
