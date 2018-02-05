@@ -39,10 +39,9 @@ class interface:
         Parses all of the user inputs and flags.
         Note: Whichever command is used first, will be the character changed.
         """
-
+        # sample: python run.py 'hello world;' -t -p
         for spot in range(len(self.args)):
             arg = self.args[spot]
-            print arg
 
             #url mode
             # '-u'
