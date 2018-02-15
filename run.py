@@ -50,7 +50,7 @@ class interface:
     Modes supported:
     -u: URL encodings
     -t: ASCII to unicode trickery
-    -b: base encoding
+    -b: base encoding(under construction)
 
     Flags to use:
     -p: Puncutation(u,t)
