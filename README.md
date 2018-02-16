@@ -1,6 +1,11 @@
-# URLEncoder
-Changing a string into different encodings and back.  
-Currently, I plan on having a encoder and decoder from ASCII to URL and vice versa.  
+# This project is mainly meant for obfusicating strings however a person can for hacking purposes. Go crazy folks, go crazy!
+## EncodeText
+Changing a string into different encodings.  
+Changes characters from their regular ASCII encoding to unicode. This has a ton of ways to obfusicate it!  
 
-# Look-a-like
-Also, I want add a look-a-like plan to this. For instance, changing a Y into a Yen, in order to try to trick a system. Sometimes, it uses the best fit for a character. This is to make that a reality. 
+## EncodeURL
+Changes a the contents of the text into a URL encoding, with different settings of course.   
+Good for attempting to bypass filters for URL's.
+
+## EncodeAddress
+Changes the DNS or ip address given to the decimal format. This format could be good for bypassing somesort of filter!  
