@@ -72,14 +72,19 @@ class interface:
         for spot in range(len(self.args)):
             arg = self.args[spot]
 
+            #IP address mode
+            #currently not added...
+            if(arg == '-A'):
+                self.setting = 2
             #url mode
             # '-u'
-            if(arg == '-u'):
+            elif(arg == '-U'):
                 self.setting = 1
             # by default, text
             # '-t'
-            elif(arg == '-t'):
+            elif(arg == '-T'):
                 self.setting = 0
+
 
             #puncutation
             #'-p'
@@ -91,6 +96,7 @@ class interface:
             #for a single character
             # '-c char'
             elif(arg == '-c'):
+                #need to throw other errors here for not enough characters...
                 if(self.setting == 0):
                     self.encoded_text = self.Text.spoof_char(self.encoded_text,self.args[spot+1])
                 elif(self.setting == 1):
