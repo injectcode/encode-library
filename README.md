@@ -8,4 +8,4 @@ Changes a the contents of the text into a URL encoding, with different settings 
 Good for attempting to bypass filters for URL's.
 
 ## EncodeAddress
-Changes the DNS or ip address given to the decimal format. This format could be good for bypassing somesort of filter!  
+Changes the DNS or ip address given to the decimal format. <b> Firefox and Chrome </b> accept a format of IP address as a group of 4 octets or in decimal. So, This format could be good for bypassing somesort of filter!  
