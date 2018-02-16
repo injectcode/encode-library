@@ -1,5 +1,4 @@
-# Obfusication Central:
-### This project is mainly meant for obfusicating strings however a person can for hacking purposes. Go crazy folks, go crazy!
+# This project is mainly meant for obfusicating strings however a person can for hacking purposes. Go crazy folks, go crazy!
 ## EncodeText
 Changing a string into different encodings.  
 Changes characters from their regular ASCII encoding to unicode. This has a ton of ways to obfusicate it!  

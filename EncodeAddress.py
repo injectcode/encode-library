@@ -117,6 +117,7 @@ class EncodeAddress:
         Returns:
             address(string): the decimal converted IP address
         """
+
         return "http://" + str(self.calc_decimal(domain_name))
 
     def convert_to_octal(self,domain_name):
@@ -127,6 +128,7 @@ class EncodeAddress:
         Returns:
             address(string): the decimal converted IP address
         """
+
         return "http://" + str(self.calc_octal(domain_name))
 
     #Note***:
@@ -139,6 +141,7 @@ class EncodeAddress:
         Returns:
             address(string): the decimal converted IP address
         """
+
         return "http://" + str(self.calc_binary(domain_name))
 
     def get_ip(self, domain_name):
@@ -172,8 +175,9 @@ class EncodeAddress:
         text = ""
         ip1 = ip1.split('.')
         ip2 = ip2.split('.')
+
         for i in range(len(spots)):
-            if spots[i] == 0:
+            if spots[i] == '0':
                 text+=ip1[i]
                 text+="."
             else:
@@ -182,7 +186,7 @@ class EncodeAddress:
 
         return text[:-1]
 
-    def convert_offset(self,domain_name,spot1,spot2,spot3,spot4, ohb = 1):
+    def convert_offset(self,domain_name,spot1,spot2,spot3,spot4, ohb = 0):
         """
         Converts the ip address to a hex and octal combination
         Args:
@@ -192,36 +196,40 @@ class EncodeAddress:
         Returns:
             An ip address
         """
-
+        ohb = int(ohb)
         #sets up the mode
-        if(ohb ==1):
+        if(ohb ==0):
             ip1 = self.calc_octal(domain_name)
             ip2= self.calc_hex(domain_name)
-        elif(ohb == 2):
+        elif(ohb == 1):
             ip1 = self.calc_octal(domain_name)
             ip2= self.calc_binary(domain_name)
-        elif(ohb == 3):
+        elif(ohb == 2):
             ip1 = self.calc_binary(domain_name)
             ip2 = self.calc_hex(domain_name)
         else:
+            print "Invalid..."
             return -1
+
 
         #sets up the change in ip
         set_up = list()
-        set_up.append(spot1)
-        set_up.append(spot2)
-        set_up.append(spot3)
-        set_up.append(spot4)
-
+        set_up.append(str(spot1))
+        set_up.append(str(spot2))
+        set_up.append(str(spot3))
+        set_up.append(str(spot4))
         #gets the new ip address
         text = self.grab_ip_section(ip1,ip2,set_up)
-        return text
+        return "https://" + text
 
 if __name__ == '__main__':
     E = EncodeAddress()
+
     print "Addresses for google.com: "
     print "Decimal: ",E.convert_to_decimal("google.com")
     print "Octal: ", E.convert_to_octal("google.com")
     print "Binary: ", E.convert_to_binary("google.com")
     print "Mix up--Octal for octet 1,2. Hex for octet 3,4"
+
     print E.convert_offset("google.com",0,0,1,1)
+    print E.convert_offset("google.com",1,1,0,0)
