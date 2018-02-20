@@ -54,7 +54,7 @@ class EncodeURL:
         """
         return self.URL_dict[char]
 
-    def URL_spoof_all(self, string):
+    def URL_spoof_all(self, string,double = False):
         """
         Changes the whole string into a URL-encoded string
         Args:
@@ -69,9 +69,11 @@ class EncodeURL:
                 encoded +=self.URL_dict[char]
             except KeyError:
                 print("Warning..." + char + " is " + " not in the URL encoder library. Skipped " + char + "...")
+        if(double != False):
+            encoded = encoded.replace("%","%25")        
         return encoded.replace('\n','')
 
-    def URL_spoof_punc(self,string):
+    def URL_spoof_punc(self,string,double = False):
         """
         Changes all puncutation into a URL code
         Args:
@@ -89,9 +91,12 @@ class EncodeURL:
                     print("Warning..." + char + " is " + " not in the URL encoder library. Skipped " + char + "...")
             else:
                 encoded += char
+
+        if(double != False):
+            encoded = encoded.replace("%","%25")
         return encoded.replace('\n','')
 
-    def URL_spoof_spot(self,string,spot):
+    def URL_spoof_spot(self,string,spot,double = False):
         """
         Changes one character into a URL string
         Args:
@@ -113,9 +118,12 @@ class EncodeURL:
             else:
                 encoded += char
             iteration+=1
+
+        if(double != False):
+            encoded = encoded.replace("%","%25")
         return encoded.replace('\n','')
 
-    def URL_spoof_char(self,string,change):
+    def URL_spoof_char(self,string,change,double = False):
         """
         Spoofs a single character
         Args:
@@ -136,6 +144,9 @@ class EncodeURL:
                 encoded += char
             iteration+=1
         return encoded.replace('\n','')
+
+    def double_encode(self,string):
+        return string.replace("%","%25")
 
 if __name__ == '__main__':
 

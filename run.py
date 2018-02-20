@@ -182,7 +182,8 @@ class interface:
                     print "Not supported for this mode"
                 elif(self.setting == 2):
                     self.encoded_text = self.Address.convert_to_binary(self.encoded_text)
-
+            elif(arg == '-dd'):
+                self.encoded_text = self.URL.double_encode(self.encoded_text)
             else:
                 print "Not a valid flag-- Continue"
 
