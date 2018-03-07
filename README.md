@@ -11,12 +11,14 @@ By changing all y's to URL encode 'how's your day' turns into `how's %79our da%7
 
 ## EncodeAddress -A
 Changes the DNS or ip address given to the decimal format. <b> Firefox and Chrome </b> accept a format of IP address as a group of 4 octets or in decimal, octal or mixed So, This format could be good for bypassing filters. 
-Google.com(*************8 )in different forms:  
+Google.com(74.125.135.139)in different forms:  
 Decimal: http://1249740645   
 Octal:  http://0112.0175.0207.0161  
 Binary: http://01001010.01111101.10000111.10001011  
 Mix-up: Octal for 1,2 and normal octets for 3,4  
 https://0112.0175.135.102  
+
+Note: Binary does not work on Chrome and Firefox, haven't checked any other browsers. But, sometimes the mix-up throws insecure ip address errors. 
 
 ## How to use:
 
