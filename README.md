@@ -1,13 +1,14 @@
 # Obfuscating Strings, IP addresses and URL's
 ## EncodeText -T(default)
 Changing a string into different encodings.  
-Changes characters from their regular ASCII encoding to unicode. This has a ton of ways to obfuscate it!  
-hacktheplanet<script> could turn into `hacktheplanet﹤script﹥` or `𝖍ǎ𝕔𝔨ţ𝖍ȩ𝖕ℓǎ𝖓ȩţ`
+Changes characters from their regular ASCII encoding to unicode. This has a ton of ways to obfuscate it!   
+hacktheplanet<script> could turn into `hacktheplanet﹤script﹥` or `𝖍ǎ𝕔𝔨ţ𝖍ȩ𝖕ℓǎ𝖓ȩţ`  
  
 ## EncodeURL -U
-Changes a the contents of the text into a URL encoding, with different settings of course.   
-Good for attempting to bypass filters for URL's. Instead of manually changing the URL with the codes, this automagically does it for you. 
-By changing all y's to URL encode 'how's your day' turns into `how's %79our da%79`
+Changes a the contents of the text into a URL encoding, with different settings of course.     
+Good for attempting to bypass filters for URL's. Instead of manually changing the URL with the codes, this automagically does it for you.  
+By changing all y's to URL encode 'how's your day' turns into `how's %79our da%79`   
+Also supports double encoding of URL's.  
 
 ## EncodeAddress -A
 Changes the DNS or ip address given to the decimal format. <b> Firefox and Chrome </b> accept a format of IP address as a group of 4 octets or in decimal, octal or mixed So, This format could be good for bypassing filters. 
