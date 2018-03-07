@@ -21,13 +21,16 @@ https://0112.0175.135.102
 Note: Binary does not work on Chrome and Firefox, haven't checked any other browsers. But, sometimes the mix-up throws insecure ip address errors. 
 
 ## How to use:
+1. Download this repository with `git clone https://github.com/mdulin2/encode-library`  
+2. In the same directory, run `cd ./encode-library`  
+3. Run the python script! This is shown below.
 
 The general format is below:
 ```
 python run.py "mystring" -type_wanted -settings
 ```
+<br/>
 
- 
 mystring is the string that the user wants to alter.  
 typewanted: currently -T for text, -U for urls and -A for IP addresses.  
 -settings: these are all the different flags that can be used. All of the flags are below:
@@ -55,4 +58,9 @@ A real example: `python run.py "hacktheplanet<script>" -T -p` will run the text 
 
 ```
 
-It should be noted that the flags are done in the order that they are thrown into. For instance, if a punctuation, with the -p flag, is encoded, then it will only be encoded this one time. So, if a -k flag, for encoding all, is used, then nothing else will happen to the other characters.
+It should be noted that the flags are done in the order that they are thrown into. For instance, if a punctuation, with the -p flag, is encoded, then it will only be encoded this one time. So, if a -k flag, for encoding all, is used, then nothing else will happen to the other characters.  
+
+## Closing Thoughts:
+Let me know what you think about it, if you find a bug or want to help out on it! I'd love to add some other features to this.  
+I plan on packaging this to be installed with pip in the future, but we'll see.   
+`Email: mdulin2@zagmail.gonzaga.edu `
