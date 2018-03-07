@@ -35,7 +35,13 @@ python run.py "mystring" -type_wanted -settings
 mystring is the string that the user wants to alter.  
 typewanted: currently -T for text, -U for urls and -A for IP addresses.  
 -settings: these are all the different flags that can be used. All of the flags are below:
-A real example: `python run.py "hacktheplanet<script>" -T -p` will run the text obfuscater on all punctuation on hacktheplanet<script>. This results in `hacktheplanet﹤script﹥` 
+A real example: `python run.py "hacktheplanet<script>" -T -p` will run the text obfuscater on all punctuation on hacktheplanet<script>. This results in `hacktheplanet﹤script﹥`  
+ 
+ ## Flags
+ Below are the flags supported for the functionality.  
+ First, the flag is shown with any needed parameters: -c char
+ Second, a description of the flag.  
+ Third, where it can be used. u for URL, T for text mode and A for IP address mode. 
 ```
     Modes supported:  
     -U: URL encodings --defaults to punctuation
