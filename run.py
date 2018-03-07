@@ -66,6 +66,7 @@ class interface:
     -o: octal mode for the ip address
     -d: decimal mode for the ip address
     -bi: binary mode for the ip address
+    -dd: double encode a url
         """
         return help_list
 
@@ -183,6 +184,7 @@ class interface:
                 elif(self.setting == 2):
                     self.encoded_text = self.Address.convert_to_binary(self.encoded_text)
             elif(arg == '-dd'):
+                #double encoding
                 self.encoded_text = self.URL.double_encode(self.encoded_text)
             else:
                 print "Not a valid flag-- Continue"
@@ -193,7 +195,7 @@ class interface:
             if(self.setting == 0):
                 self.encoded_text = self.Text.spoof_punc(self.encoded_text,0)
             elif(self.setting == 1):
-                self.encoded_text = self.URL.URL_spoof_punc(self.encoded_text)
+                self.encoded_text = self.URL.URL_real(self.encoded_text)
             elif(self.setting == 2):
                 self.encoded_text = self.Address.convert_to_decimal(self.encoded_text)
             else:

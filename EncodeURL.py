@@ -1,3 +1,5 @@
+import re
+
 class EncodeURL:
 
     def __init__(self):
@@ -70,8 +72,41 @@ class EncodeURL:
             except KeyError:
                 print("Warning..." + char + " is " + " not in the URL encoder library. Skipped " + char + "...")
         if(double != False):
-            encoded = encoded.replace("%","%25")        
+            encoded = encoded.replace("%","%25")
         return encoded.replace('\n','')
+
+    def URL_real(self,string,extra = [], remove = []):
+        """
+        Changes the URL to the actual would be URL encoding
+        Args:
+            string(str): the string to be changed
+            extra: a list or a character to be added to the URL's not to change.
+            remove: a list of character to have the URL changed on it.
+        Returns:
+            max_string(str): the encoded string.
+        """
+
+        max_string = ""
+        char_list = ["~",":","/","#","[", "]", "@","!","$","'","&","(",")","*","+",",",";","=","."]
+
+        for elt in extra:
+            char_list.append(elt)
+
+        for elt in remove:
+            char_list.remove(elt)
+        for char in string:
+            result = re.search("[A-Za-z0-9_-]",char)
+            if result != None:
+                #normal char
+                max_string+=char
+            elif(char in char_list):
+                max_string+= char
+
+            else:
+                max_string+=self.URL_dict[char]
+
+        max_string = max_string.replace("\n","")
+        return max_string
 
     def URL_spoof_punc(self,string,double = False):
         """
@@ -151,6 +186,8 @@ class EncodeURL:
 if __name__ == '__main__':
 
     U = EncodeURL()
+    U.URL_real("https://MaxwellDuin.com/<script>(f)", remove = ")")
+
     print U.URL_spoof_all("how's your day?")
     print U.URL_spoof_punc("how's your day?")
     print U.URL_spoof_spot("how's your day?",1)
