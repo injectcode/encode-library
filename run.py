@@ -53,20 +53,23 @@ class interface:
     -U: URL encodings --defaults to Puncutation
     -T: ASCII to unicode trickery--defaults to puncutation
     -A: Address encoding --defaults to decimal
-    -B: base encoding(under construction)
 
     Flags to use:
-    -p: Puncutation(u,t)
+    -p: punctuation(u,t)
     -c char: A single character(u,t)
+    -c -tt # # # #: the mixing of the IP address type. 0 for octal, 1 for normal octets(a)
     -k: Craziness; does the craziness thing possible(u,t)
     -s: Script mode for all characters(t)
     -a: Ticks on top of the characters(t)
     -1 char spot: Replaces the 'char' with in the 'spot'(t)
     -2 spot: Replaces the character with the URL encode(u)
-    -o: octal mode for the ip address
-    -d: decimal mode for the ip address
-    -bi: binary mode for the ip address
-    -dd: double encode a url
+    -dd: double encode a url(u)
+    -sl: encode the slash for a directory traversal(u)
+    -dsl: encode the ../ for the direcotry traversal(u)
+    -o: octal mode for the ip address(a)
+    -d: decimal mode for the ip address(a)
+    -bi: binary mode for the ip address(a)
+
         """
         return help_list
 
@@ -186,6 +189,10 @@ class interface:
             elif(arg == '-dd'):
                 #double encoding
                 self.encoded_text = self.URL.double_encode(self.encoded_text)
+            elif(arg == '-sl'):
+                self.encoded_text = self.URL.dot_dot_slash(self.encoded_text)
+            elif(arg == '-dsl'):
+                self.encoded_text = self.URL.dot_dot_slash(self.encoded_text, allT = True)
             else:
                 print "Not a valid flag-- Continue"
 

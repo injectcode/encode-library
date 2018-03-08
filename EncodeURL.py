@@ -167,9 +167,14 @@ class EncodeURL:
         Returns: a string with the character changed in the URL
         """
         encoded = ""
-        iteration = 1
-        for char in string:
-            if(char == change ):
+        iteration = 0
+        while(iteration <= len(string)-1):
+            char = string[iteration]
+            if(char == "%"):
+                encoded+=string[iteration:iteration+3]
+                iteration +=2
+
+            elif(char == change):
                 try:
                     encoded +=self.URL_dict[char]
                 except KeyError:
@@ -180,15 +185,33 @@ class EncodeURL:
             iteration+=1
         return encoded.replace('\n','')
 
+    def dot_dot_slash(self,string,allT = False):
+        """
+        ../ gets rejected by most browsers. So, this hopes to fix that.
+        Args:
+            string(str): the URL that being obfusicated
+            allT(bool): optional- True URL encodes both the dots and the /
+        Returns:
+            the obfusicated string
+        """
+        if(allT == False):
+            return self.URL_spoof_char(string,"/")
+        else:
+            slash = self.URL_dict["/"]
+            dot = self.URL_dict["."]
+            string = string.replace("../",dot+dot+slash)
+            string = string.replace("./",dot+slash)
+            return string.replace('\n',"")
+
     def double_encode(self,string):
         return string.replace("%","%25")
 
 if __name__ == '__main__':
 
     U = EncodeURL()
-    U.URL_real("https://MaxwellDuin.com/<script>(f)", remove = ")")
-
+    #U.URL_real("https://MaxwellDuin.com/<script>(f)", remove = ")")
+    print U.dot_dot_slash("https://MaxwellDulin.com/../", allT = False)
     print U.URL_spoof_all("how's your day?")
     print U.URL_spoof_punc("how's your day?")
     print U.URL_spoof_spot("how's your day?",1)
-    print U.URL_spoof_char("how's your day?","y")
+    print U.URL_spoof_char("how's your day?%23","y")
