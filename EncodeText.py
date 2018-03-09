@@ -9,11 +9,6 @@ class EncodeText:
     """
     Used to encode a string of text, from the choosen user, into a specified type.
     Changes specified character into a "look-a-like" of it.
-    Includes:
-    URL encoding:
-        ASCII
-    Base 64:
-    Base N:
     """
 
     def __init__(self):
@@ -22,6 +17,8 @@ class EncodeText:
         """
         self.spoof_dict = dict()
         self.setup_spoof()
+
+
 
     def insert_obs(self, category, char):
         """
@@ -151,7 +148,7 @@ class EncodeText:
                 try:
                     encode = self.replace_char(encode,char,self.spoof_dict[char][-1])
                 except Exception, e:
-                    pass
+                    encode+=char
         return encode
 
     def spoof_encode_script(self,string):
@@ -168,7 +165,7 @@ class EncodeText:
                 try:
                     encode = self.replace_char(encode,char,self.spoof_dict[char][0])
                 except Exception, e:
-                    pass
+                    encode+=char
 
         return encode
 
@@ -186,7 +183,7 @@ class EncodeText:
                 try:
                     encode = self.replace_char(encode,char,self.spoof_dict[char][1])
                 except Exception, e:
-                    pass
+                    encode+=char
 
         return encode
 
@@ -197,9 +194,10 @@ class EncodeText:
                 try:
                     encode = self.replace_char(encode,char,self.spoof_dict[char][spot])
                 except Exception, e:
-                    pass
+                    encode+=char
 
         return encode
+
 
     def spoof_char(self,string,char):
         """
@@ -208,7 +206,7 @@ class EncodeText:
 
 if __name__ == '__main__':
     E = EncodeText()
-    #E.get_letter('s','s')
+
     print "Encodings for 'How was your day?'"
     t = E.spoof_encode_script("How was your day?")
     print "Script text mode: ", t
@@ -224,3 +222,4 @@ if __name__ == '__main__':
     #good example!
     #scripts tend to be evaluated the same, but have a different encoding than added marks.
     print "Does ｂ = b?", "ｂ".decode("utf-8") == "b".decode("utf-8")
+    

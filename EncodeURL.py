@@ -195,7 +195,8 @@ class EncodeURL:
             the obfusicated string
         """
         if(allT == False):
-            return self.URL_spoof_char(string,"/")
+            slash = self.URL_dict["/"]
+            return string.replace("../",".."+slash)
         else:
             slash = self.URL_dict["/"]
             dot = self.URL_dict["."]
@@ -210,8 +211,9 @@ if __name__ == '__main__':
 
     U = EncodeURL()
     #U.URL_real("https://MaxwellDuin.com/<script>(f)", remove = ")")
-    print U.dot_dot_slash("https://MaxwellDulin.com/../", allT = False)
-    print U.URL_spoof_all("how's your day?")
-    print U.URL_spoof_punc("how's your day?")
-    print U.URL_spoof_spot("how's your day?",1)
-    print U.URL_spoof_char("how's your day?%23","y")
+
+    print "All of these are 'https://google.com/'"
+    print "../ spoof: ",U.dot_dot_slash("https://google.com/../", allT = False)
+    print "All puncutation: ",U.URL_spoof_punc("https://google.com/../")
+    print "Substiute a particular location: ",U.URL_spoof_spot("https://google.com/../",1)
+    print "Subbing out the character g",U.URL_spoof_char("https://google.com/../","g")
