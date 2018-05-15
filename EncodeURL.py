@@ -211,9 +211,11 @@ if __name__ == '__main__':
 
     U = EncodeURL()
     #U.URL_real("https://MaxwellDuin.com/<script>(f)", remove = ")")
-
+    print U.double_encode(U.dot_dot_slash("../",allT = True))
+    """
     print "All of these are 'https://google.com/'"
     print "../ spoof: ",U.dot_dot_slash("https://google.com/../", allT = False)
     print "All puncutation: ",U.URL_spoof_punc("https://google.com/../")
     print "Substiute a particular location: ",U.URL_spoof_spot("https://google.com/../",1)
     print "Subbing out the character g",U.URL_spoof_char("https://google.com/../","g")
+    """
