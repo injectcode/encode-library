@@ -105,6 +105,6 @@ class EncodeEntity:
             return True
         return False
 
-
-EE = EncodeEntity()
-print EE.spoof_punc("Max<     ",0)
+if __name__ == '__main__':
+    EE = EncodeEntity()
+    print EE.spoof_punc("Max<     ",0)

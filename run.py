@@ -4,12 +4,16 @@ import sys
 from EncodeText import EncodeText
 from EncodeURL import EncodeURL
 from EncodeAddress import EncodeAddress
+from EncodeEntity import EncodeEntity
+from EncodeZero import EncodeZero
 
 class interface:
     def __init__(self):
         self.Text = EncodeText()
         self.URL = EncodeURL()
         self.Address = EncodeAddress()
+        self.Entity = EncodeEntity()
+        self.Zero = EncodeZero()
         self.args = list()
         self.encoded_text = ""
         self.setup_args()
@@ -63,12 +67,14 @@ class interface:
     -a: Ticks on top of the characters(t)
     -1 char spot: Replaces the 'char' with in the 'spot'(t)
     -2 spot: Replaces the character with the URL encode(u)
+    -d decimal mode for url; decrypt for Encode Zero (u,z)
     -dd: double encode a url(u)
     -sl: encode the slash for a directory traversal(u)
     -dsl: encode the ../ for the direcotry traversal(u)
     -o: octal mode for the ip address(a)
     -d: decimal mode for the ip address(a)
     -bi: binary mode for the ip address(a)
+    -e: encrypt mode for Encode Zero (z)
 
         """
         return help_list
@@ -96,7 +102,10 @@ class interface:
             # '-t'
             elif(arg == '-T'):
                 self.setting = 0
-
+            elif(arg == '-Z'):
+                self.setting = 3
+            elif(arg == '-E'):
+                self.setting = 4
             #puncutation
             #'-p'
             elif(arg == '-p'):
@@ -181,6 +190,8 @@ class interface:
                     print "Not supported for this mode"
                 elif(self.setting == 2):
                     self.encoded_text = self.Address.convert_to_decimal(self.encoded_text)
+                elif(self.setting == 3):
+                    self.encoded_text = self.Zero.decrypt(self.encoded_text)
             elif(arg == '-bi'):
                 if(self.setting == 0 or self.setting== 1):
                     print "Not supported for this mode"
@@ -193,6 +204,8 @@ class interface:
                 self.encoded_text = self.URL.dot_dot_slash(self.encoded_text)
             elif(arg == '-dsl'):
                 self.encoded_text = self.URL.dot_dot_slash(self.encoded_text, allT = True)
+            elif(arg == '-e'):
+                self.encoded_text = self.Zero.encrypt(self.encoded_text) + "b"
             else:
                 print "Not a valid flag-- Continue"
 

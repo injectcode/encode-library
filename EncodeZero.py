@@ -113,8 +113,9 @@ class EncodeZero:
             else:
                 new_text += char
         return new_text
-
-E = EncodeZero()
-print "Examples: This uses ` and | to show the zero width characters..."
-print "Encrypt max ", E.show(E.encrypt("max"))
-print "Decrypt the text containing the encrypted string: ", E.decrypt(E.encrypt("max") + "more text!")
+        
+if __name__ == '__main__':
+    E = EncodeZero()
+    print "Examples: This uses ` and | to show the zero width characters..."
+    print "Encrypt max ", E.show(E.encrypt("max"))
+    print "Decrypt the text containing the encrypted string: ", E.decrypt(E.encrypt("max") + "more text!")
