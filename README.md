@@ -22,6 +22,8 @@ Binary: http://01001010.01111101.10000111.10001011
 Mix-up: Octal for 1,2 and normal octets for 3,4  
 https://0112.0175.135.102  
 
+Practical Purpose: When an application blocks requests from the localhost or the normal localhost IP address 127.0.0.1, it's valuable to test the applications filter using different representations of these IP addresses.  
+Further, be aware that 0's are allowed to be omitted from IP addresses. And, there are more funky rules with IP addresses that should be looked into more!   
 Note: Binary does not work on Chrome and Firefox, haven't checked any other browsers. But, sometimes the mix-up throws insecure IP address errors.
 
 ## EncodeEntity -E
